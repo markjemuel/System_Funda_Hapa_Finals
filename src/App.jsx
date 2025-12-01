@@ -4,6 +4,7 @@ import Card from "./card";
 import ProductDetail from "./productsDetails";
 import "./app.css";
 import { iphoneProducts, ipadProducts, macbookProducts } from "./products";
+("");
 
 const allProducts = [
   { title: "Iphone", items: iphoneProducts },
@@ -37,7 +38,7 @@ function App() {
           justifyContent: "flex-start",
           padding: "24px",
           boxSizing: "border-box",
-          backgroundColor: "#f0f0f0",
+          backgroundColor: "#252525ff",
         }}
       >
         <h1 style={{ textAlign: "center", marginBottom: "24px" }}>
@@ -51,19 +52,10 @@ function App() {
             element={
               <>
                 {/* Filter and search bar */}
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "12px",
-                    marginBottom: "24px",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                  }}
-                >
+                <div className="filter-search-container">
                   <select
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
-                    style={{ padding: "8px", fontSize: "16px" }}
                   >
                     <option value="">All Categories</option>
                     {allProducts.map((card) => (
@@ -78,7 +70,6 @@ function App() {
                     placeholder="Search by product name"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: "8px", fontSize: "16px", width: "240px" }}
                   />
                 </div>
 

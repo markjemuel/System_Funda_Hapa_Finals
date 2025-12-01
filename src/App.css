@@ -1,16 +1,13 @@
-/* Global background and font */
+/* Global settings */
 body {
   margin: 0;
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(
-    135deg,
-    #e0e7ff,
-    #f0f4f8
-  ); /* soft modern gradient */
-  color: #333;
+  font-family: -apple-system, "SF Pro Text", "SF Pro Display", "San Francisco",
+    Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+  color: #ffffffcc;
+  min-height: 100vh;
 }
 
-/* Root container */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -18,7 +15,34 @@ body {
   text-align: center;
 }
 
-/* App container */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  color: #fafafc;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+select,
+input[type="text"] {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: #111111;
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+select:focus,
+input[type="text"]:focus {
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3);
+  border-color: #0a84ff;
+  background: rgba(3, 3, 3, 0.1);
+}
+
 .app-container {
   min-height: 100vh;
   padding: 24px;
@@ -27,109 +51,48 @@ body {
   align-items: center;
 }
 
-/* Headings */
-h1,
-h2,
-h3 {
-  font-weight: 600;
-  color: #1f2937; /* darker modern gray */
-  margin-bottom: 16px;
-}
-
-/* Product card grid */
 .card-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   justify-content: center;
 }
-
-/* Individual product card */
-.product-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  width: 260px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.filter-search-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 32px;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+.filter-search-container select,
+.filter-search-container input[type="text"] {
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  font-size: 16px;
+  outline: none;
+  background: rgba(28, 28, 30, 0.7); /* semi-transparent dark background */
+  color: #ffffffcc;
+  transition: box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.product-card img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.product-card h3 {
-  margin: 12px 0 6px;
-  font-size: 1.1rem;
-  color: #111827;
-}
-
-/* Buttons */
-button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-button.increment {
-  background-color: #10b981; /* green */
+.filter-search-container select:focus,
+.filter-search-container input[type="text"]:focus {
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3);
+  border-color: #0a84ff;
+  background: rgba(28, 28, 30, 0.85);
   color: #fff;
 }
 
-button.decrement {
-  background-color: #ef4444; /* red */
-  color: #fff;
+.filter-search-container input[type="text"]::placeholder {
+  color: #ffffff77;
 }
 
-/* View Details link */
-.view-details {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 8px 14px;
-  background-color: #3b82f6; /* blue */
-  color: #fff;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.view-details:hover {
-  background-color: #2563eb;
-}
-
-/* Product detail page */
-.detail-container {
-  max-width: 900px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-}
-
-.detail-container img {
-  max-width: 400px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.detail-container p {
-  margin: 8px 0;
-  line-height: 1.6;
-  color: #374151;
+/* Responsive: stack on small screens */
+@media (max-width: 600px) {
+  .filter-search-container {
+    flex-direction: column;
+    gap: 12px;
+  }
 }
