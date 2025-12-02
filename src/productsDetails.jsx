@@ -1,28 +1,68 @@
-import { useParams, Link } from "react-router-dom";
-import { iphoneProducts, ipadProducts, macbookProducts } from "./products";
-import "./productsDetails.css"; // updated import
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const allProducts = [...iphoneProducts, ...ipadProducts, ...macbookProducts];
-
-function ProductDetail() {
+function ProductDetail({ allProducts }) {
   const { id } = useParams();
-  const product = allProducts.find((p) => p.id === Number(id));
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
 
-  if (!product) {
-    return <p>Product not found</p>;
-  }
+  useEffect(() => {
+    const found = allProducts.find((p) => p.id.toString() === id);
+    setProduct(found);
+  }, [id, allProducts]);
+
+  if (!product) return <p style={{ color: "#f5f5f7" }}>Product not found</p>;
 
   return (
-    <div className="product-detail-container">
-      <Link to="/">← Back to Inventory</Link>
+    <div
+      style={{
+        padding: "24px",
+        color: "#f5f5f7",
+        backgroundColor: "#1c1c1e",
+        minHeight: "100vh",
+      }}
+    >
+      <button
+        onClick={() => navigate(-1)}
+        style={{
+          marginBottom: "24px",
+          backgroundColor: "#007aff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "8px",
+          padding: "8px 12px",
+          cursor: "pointer",
+        }}
+      >
+        Back
+      </button>
+
       <h2>{product.name}</h2>
-      <img src={product.image} alt={product.name} />
+      <img
+        src={product.image || product.img || product.imageUrl}
+        alt={product.name}
+        style={{ width: "300px", borderRadius: "8px", marginBottom: "12px" }}
+      />
+      <p>
+        <strong>Category:</strong> {product.category}
+      </p>
+      <p>
+        <strong>Description:</strong> {product.description}
+      </p>
+      <p>
+        <strong>Specification:</strong> {product.specification}
+      </p>
+      <p>
+        <strong>Rating:</strong> {product.rating}
+      </p>
       <p>
         <strong>Price:</strong> ${product.price}
       </p>
       <p>
-        <strong>Description:</strong>{" "}
-        {product.description || "No description available."}
+        <strong>Quantity:</strong> {product.quantity}
+      </p>
+      <p>
+        <strong>Subtotal:</strong> ${product.price * product.quantity}
       </p>
     </div>
   );

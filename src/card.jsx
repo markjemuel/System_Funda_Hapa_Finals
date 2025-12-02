@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./card.css"; // import the new CSS
+import "./card.css";
 
 function Card({ title, products }) {
   const [quantities, setQuantities] = useState({});
@@ -19,9 +19,9 @@ function Card({ title, products }) {
       <div className="card-grid">
         {products.map((p) => (
           <div key={p.id} className="product-card">
-            {/* this part shows the product image with the cart icon on top */}
             <div className="image-wrapper">
               <img src={p.image} alt={p.name} />
+
               <button
                 className="add-to-cart-icon"
                 disabled={(quantities[p.id] || 0) === 0}
@@ -35,6 +35,7 @@ function Card({ title, products }) {
             <p>Price: ${p.price}</p>
             <p>Quantity: {quantities[p.id] || 0}</p>
 
+            {/* QUANTITY BUTTONS */}
             <div className="quantity-controls">
               <button
                 onClick={() => handleChange(p.id, -1)}
@@ -45,8 +46,7 @@ function Card({ title, products }) {
               <button onClick={() => handleChange(p.id, 1)}>+</button>
             </div>
 
-            {/* link to the product details page */}
-            <Link to={`/product/${p.id}`} className="view-details">
+            <Link to={`/products/${p.id}`} className="view-details">
               View Details
             </Link>
           </div>

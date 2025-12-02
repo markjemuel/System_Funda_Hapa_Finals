@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Card from "./card";
 import ProductDetail from "./productsDetails";
+import AddProductForm from "./AddProductForm";
 import "./app.css";
 import { iphoneProducts, ipadProducts, macbookProducts } from "./products";
-("");
 
-const allProducts = [
+const initialProducts = [
   { title: "Iphone", items: iphoneProducts },
   { title: "Ipad", items: ipadProducts },
   { title: "MacBook", items: macbookProducts },
@@ -15,52 +15,108 @@ const allProducts = [
 function App() {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState(initialProducts);
 
-  // This handles filtering by category and search term
-  const filteredCards = allProducts
-    .filter((card) => !categoryFilter || card.title === categoryFilter)
-    .map((card) => ({
-      ...card,
-      items: card.items.filter((p) =>
+  const addProduct = (newProduct) => {
+    setProducts((prev) =>
+      prev.map((cat) =>
+        cat.title === newProduct.category
+          ? { ...cat, items: [...cat.items, newProduct] }
+          : cat
+      )
+    );
+  };
+
+  const allProductsFlat = products.flatMap((cat) => cat.items);
+
+  const filteredCards = products
+    .filter((cat) => !categoryFilter || cat.title === categoryFilter)
+    .map((cat) => ({
+      ...cat,
+      items: cat.items.filter((p) =>
         p.name.toLowerCase().includes(searchTerm.toLowerCase())
       ),
     }))
-    .filter((card) => card.items.length > 0); // hide empty cards
+    .filter((cat) => cat.items.length > 0);
+
+  const overallTotal = products.reduce(
+    (total, cat) =>
+      total + cat.items.reduce((sub, p) => sub + p.price * p.quantity, 0),
+    0
+  );
 
   return (
     <Router>
-      <div
+      <nav
         style={{
-          minHeight: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          background: "#3f3f3fff",
+          backdropFilter: "blur(70px)",
+          padding: "14px 20px",
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
-          justifyContent: "flex-start",
-          padding: "24px",
-          boxSizing: "border-box",
-          backgroundColor: "#252525ff",
+          zIndex: 1000,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
         }}
       >
-        <h1 style={{ textAlign: "center", marginBottom: "24px" }}>
+        <Link
+          to="/"
+          style={{
+            color: "#fff",
+            fontSize: "22px",
+            fontWeight: "600",
+            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
+          }}
+        >
+          <img
+            src="/images/apple_logo.png"
+            alt="Apple"
+            style={{ width: "80px", height: "80px" }}
+          />
           Apple Products
-        </h1>
+        </Link>
 
+        <a
+          href="#add-product"
+          style={{
+            color: "#007aff",
+            fontSize: "18px",
+            fontWeight: "500",
+            marginRight: "50px",
+          }}
+        >
+          Add Product
+        </a>
+      </nav>
+
+      <div
+        style={{
+          padding: "100px 24px 24px",
+          minHeight: "100vh",
+          backgroundColor: "#252525",
+        }}
+      >
         <Routes>
-          {/* Main inventory route */}
           <Route
             path="/"
             element={
               <>
-                {/* Filter and search bar */}
                 <div className="filter-search-container">
                   <select
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
                   >
                     <option value="">All Categories</option>
-                    {allProducts.map((card) => (
-                      <option key={card.title} value={card.title}>
-                        {card.title}
+                    {products.map((cat) => (
+                      <option key={cat.title} value={cat.title}>
+                        {cat.title}
                       </option>
                     ))}
                   </select>
@@ -73,30 +129,26 @@ function App() {
                   />
                 </div>
 
-                {/* Show the filtered product cards */}
-                <div
-                  style={{
-                    width: "100%",
-                    maxWidth: "1200px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "24px",
-                  }}
-                >
-                  {filteredCards.map((card) => (
-                    <Card
-                      key={card.title}
-                      title={card.title}
-                      products={card.items}
-                    />
-                  ))}
-                </div>
+                {filteredCards.map((cat) => (
+                  <Card
+                    key={cat.title}
+                    title={cat.title}
+                    products={cat.items}
+                  />
+                ))}
+
+                <AddProductForm addProduct={addProduct} />
+
+                <h2 style={{ textAlign: "center", marginTop: "24px" }}>
+                  Overall Total: ${overallTotal}
+                </h2>
               </>
             }
           />
-
-          {/* Product details route */}
-          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route
+            path="/products/:id"
+            element={<ProductDetail allProducts={allProductsFlat} />}
+          />
         </Routes>
       </div>
     </Router>

@@ -8,7 +8,6 @@
   font-family: "Arial", sans-serif;
 }
 
-/* Back link */
 .product-detail-container a {
   display: inline-block;
   margin-bottom: 16px;
@@ -22,14 +21,12 @@
   color: #1a5cff;
 }
 
-/* Product title */
 .product-detail-container h2 {
   font-size: 28px;
   margin-bottom: 16px;
   color: #333;
 }
 
-/* Product image */
 .product-detail-container img {
   width: 100%;
   max-width: 400px;
@@ -44,7 +41,6 @@
   transform: scale(1.05);
 }
 
-/* Product information text */
 .product-detail-container p {
   font-size: 16px;
   line-height: 1.6;
@@ -56,7 +52,6 @@
   color: #333;
 }
 
-/* Responsive for smaller screens */
 @media (max-width: 600px) {
   .product-detail-container {
     padding: 16px;
