@@ -2,7 +2,7 @@ export const iphoneProducts = [
   {
     id: 1,
     name: "Iphone 17",
-    price: 799,
+    price: 57990,
     quantity: 1,
     image: "/images/iphone17.jpg",
     description:
@@ -11,7 +11,7 @@ export const iphoneProducts = [
   {
     id: 2,
     name: "Iphone 17 Pro",
-    price: 1200,
+    price: 72900,
     quantity: 2,
     image: "/images/iphone17pro.jpg",
     description:
@@ -20,7 +20,7 @@ export const iphoneProducts = [
   {
     id: 3,
     name: "Iphone 17 Pro Max",
-    price: 1600,
+    price: 86990,
     quantity: 1,
     image: "/images/iphone17promax.jpg",
     description:
@@ -32,7 +32,7 @@ export const ipadProducts = [
   {
     id: 4,
     name: "Ipad Pro",
-    price: 1300,
+    price: 72990,
     quantity: 1,
     image: "/images/ipadPro.jpg",
     description:
@@ -41,7 +41,7 @@ export const ipadProducts = [
   {
     id: 5,
     name: "Ipad Air",
-    price: 720,
+    price: 42990,
     quantity: 1,
     image: "/images/ipad_air.jpg",
     description: "Serious performance in a thin and light design.",
@@ -49,7 +49,7 @@ export const ipadProducts = [
   {
     id: 6,
     name: "Ipad",
-    price: 410,
+    price: 24990,
     quantity: 2,
     image: "/images/ipad.jpg",
     description:
@@ -61,7 +61,7 @@ export const macbookProducts = [
   {
     id: 7,
     name: "MacBook Pro 16-inch",
-    price: 1706.31,
+    price: 159990,
     quantity: 2,
     image: "/images/macbook_pro.jpg",
     description: "The most advanced Mac laptops for demanding workflows.",
@@ -69,7 +69,7 @@ export const macbookProducts = [
   {
     id: 8,
     name: "MacBook Air",
-    price: 999,
+    price: 64900,
     quantity: 4,
     image: "/images/macbook_air.jpg",
     description:
@@ -78,7 +78,7 @@ export const macbookProducts = [
   {
     id: 9,
     name: "iMac",
-    price: 1450,
+    price: 84990,
     quantity: 1,
     image: "/images/imac.jpg",
     description:

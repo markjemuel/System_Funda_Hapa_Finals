@@ -7,6 +7,10 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   backdrop-filter: blur(8px);
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .product-card:hover {
@@ -22,7 +26,6 @@
   margin-bottom: 12px;
 }
 
-/* Product name and price */
 .product-card h3 {
   font-size: 1.1rem;
   color: #ffffff;
@@ -31,11 +34,10 @@
 
 .product-card p {
   font-size: 0.95rem;
-  color: #fbfbfc99; /* lighter gray */
+  color: #fbfbfc99;
   margin: 4px 0;
 }
 
-/* Quantity buttons */
 .quantity-controls {
   display: flex;
   justify-content: center;
@@ -57,7 +59,6 @@
   background: #e1e1e6;
 }
 
-/* Add to cart icon */
 .add-to-cart-icon {
   position: absolute;
   top: 12px;
@@ -85,7 +86,6 @@
   cursor: not-allowed;
 }
 
-/* View Details button */
 .view-details {
   display: block;
   margin: 14px auto 0;
@@ -103,7 +103,6 @@
   background-color: #005bb5;
 }
 
-/* Product detail page */
 .detail-container {
   max-width: 800px;
   margin: 0 auto;
@@ -126,4 +125,13 @@
   color: #3c3c4399;
   margin: 8px 0;
   line-height: 1.6;
+}
+.card-container {
+  padding: 24px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
 }

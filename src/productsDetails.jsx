@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function ProductDetail({ allProducts }) {
+function ProductDetail({ allProducts, formatPHP }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
@@ -56,13 +56,13 @@ function ProductDetail({ allProducts }) {
         <strong>Rating:</strong> {product.rating}
       </p>
       <p>
-        <strong>Price:</strong> ${product.price}
+        <strong>Price:</strong> {formatPHP(product.price)}
       </p>
       <p>
         <strong>Quantity:</strong> {product.quantity}
       </p>
       <p>
-        <strong>Subtotal:</strong> ${product.price * product.quantity}
+        <strong>Subtotal:</strong> {formatPHP(product.price * product.quantity)}
       </p>
     </div>
   );

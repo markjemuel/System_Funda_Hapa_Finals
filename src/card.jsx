@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./card.css";
 
-function Card({ title, products }) {
+function Card({ title, products, formatPHP }) {
   const [quantities, setQuantities] = useState({});
 
   const handleChange = (id, delta) => {
@@ -32,10 +32,9 @@ function Card({ title, products }) {
             </div>
 
             <h3>{p.name}</h3>
-            <p>Price: ${p.price}</p>
+            <p>Price: {formatPHP(p.price)}</p>
             <p>Quantity: {quantities[p.id] || 0}</p>
 
-            {/* QUANTITY BUTTONS */}
             <div className="quantity-controls">
               <button
                 onClick={() => handleChange(p.id, -1)}

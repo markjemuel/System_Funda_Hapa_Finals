@@ -6,6 +6,13 @@ import AddProductForm from "./AddProductForm";
 import "./app.css";
 import { iphoneProducts, ipadProducts, macbookProducts } from "./products";
 
+const formatPHP = (amount) => {
+  return new Intl.NumberFormat("en-PH", {
+    style: "currency",
+    currency: "PHP",
+  }).format(amount);
+};
+
 const initialProducts = [
   { title: "Iphone", items: iphoneProducts },
   { title: "Ipad", items: ipadProducts },
@@ -18,13 +25,21 @@ function App() {
   const [products, setProducts] = useState(initialProducts);
 
   const addProduct = (newProduct) => {
-    setProducts((prev) =>
-      prev.map((cat) =>
-        cat.title === newProduct.category
-          ? { ...cat, items: [...cat.items, newProduct] }
-          : cat
-      )
-    );
+    setProducts((prev) => {
+      const categoryExists = prev.some(
+        (cat) => cat.title === newProduct.category
+      );
+
+      if (categoryExists) {
+        return prev.map((cat) =>
+          cat.title === newProduct.category
+            ? { ...cat, items: [...cat.items, newProduct] }
+            : cat
+        );
+      } else {
+        return [...prev, { title: newProduct.category, items: [newProduct] }];
+      }
+    });
   };
 
   const allProductsFlat = products.flatMap((cat) => cat.items);
@@ -134,20 +149,26 @@ function App() {
                     key={cat.title}
                     title={cat.title}
                     products={cat.items}
+                    formatPHP={formatPHP}
                   />
                 ))}
 
                 <AddProductForm addProduct={addProduct} />
 
                 <h2 style={{ textAlign: "center", marginTop: "24px" }}>
-                  Overall Total: ${overallTotal}
+                  Overall Total: {formatPHP(overallTotal)}
                 </h2>
               </>
             }
           />
           <Route
             path="/products/:id"
-            element={<ProductDetail allProducts={allProductsFlat} />}
+            element={
+              <ProductDetail
+                allProducts={allProductsFlat}
+                formatPHP={formatPHP}
+              />
+            }
           />
         </Routes>
       </div>
