@@ -45,7 +45,6 @@ function AddProductForm({ addProduct }) {
     });
   };
 
-  // common style for all inputs and textareas
   const inputStyle = {
     width: "100%",
     padding: "10px",
